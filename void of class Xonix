@@ -1,0 +1,59 @@
+void init() {
+            y = 0;
+            x = FIELD_WIDTH / 2;
+            direction = 0;
+            isWater = false;
+        }
+
+        int getX() {
+            return x;
+        }
+
+        int getY() {
+            return y;
+        }
+
+        int getCountLives() {
+            return countLives;
+        }
+
+        void decreaseCountLives() {
+            countLives--;
+        }
+
+        void setDirection(int direction) {
+            this.direction = direction;
+        }
+
+        void move() {
+            if (direction == LEFT) x--;
+            if (direction == RIGHT) x++;
+            if (direction == UP) y--;
+            if (direction == DOWN) y++;
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (y > FIELD_HEIGHT - 1) y = FIELD_HEIGHT - 1;
+            if (x > FIELD_WIDTH - 1) x = FIELD_WIDTH - 1;
+            isSelfCross = field.getColor(x, y) == COLOR_TRACK;
+            if (field.getColor(x, y) == COLOR_LAND && isWater) {
+                direction = 0;
+                isWater = false;
+                field.tryToFill();
+            }
+            if (field.getColor(x, y) == COLOR_WATER) {
+                isWater = true;
+                field.setColor(x, y, COLOR_TRACK);
+            }
+        }
+
+        boolean isSelfCrosed() {
+            return isSelfCross;
+        }
+
+        void paint(Graphics g) {
+            g.setColor((field.getColor(x, y) == COLOR_LAND) ? new Color(COLOR_TRACK) : Color.white);
+            g.fillRect(x * POINT_SIZE, y * POINT_SIZE, POINT_SIZE, POINT_SIZE);
+            g.setColor((field.getColor(x, y) == COLOR_LAND) ? Color.white : new Color(COLOR_TRACK));
+            g.fillRect(x * POINT_SIZE + 3, y * POINT_SIZE + 3, POINT_SIZE - 6, POINT_SIZE - 6);
+        }
+    }
