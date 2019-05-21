@@ -1,0 +1,7 @@
+ class Xonix {
+        private int x, y, direction, countLives = 3;
+        private boolean isWater, isSelfCross;
+
+        Xonix() {
+            init();
+        }
