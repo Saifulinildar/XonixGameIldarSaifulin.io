@@ -1,0 +1,11 @@
+class Ball {
+        private int x, y, dx, dy;
+
+        Ball() {
+            do {
+                x = random.nextInt(FIELD_WIDTH);
+                y = random.nextInt(FIELD_HEIGHT);
+            } while (field.getColor(x, y) > COLOR_WATER);
+            dx = random.nextBoolean() ? 1 : -1;
+            dy = random.nextBoolean() ? 1 : -1;
+        }
