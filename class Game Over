@@ -1,0 +1,18 @@
+ class GameOver {
+        private final String GAME_OVER_MSG = "GAME OVER";
+        private boolean gameOver;
+
+        boolean isGameOver() {
+            return gameOver;
+        }
+
+        void paint(Graphics g) {
+            if (xonix.getCountLives() == 0) {
+                gameOver = true;
+                g.setColor(Color.white);
+                g.setFont(new Font("", Font.BOLD, 60));
+                FontMetrics fm = g.getFontMetrics();
+                g.drawString(GAME_OVER_MSG, (FIELD_WIDTH * POINT_SIZE + FIELD_DX - fm.stringWidth(GAME_OVER_MSG)) / 2, (FIELD_HEIGHT * POINT_SIZE) / 2);
+            }
+        }
+    }
