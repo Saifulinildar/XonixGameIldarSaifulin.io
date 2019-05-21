@@ -1,0 +1,35 @@
+ class Cube {
+        private int x, y, dx, dy;
+
+        Cube() {
+            init();
+        }
+
+        void init() {
+            x = dx = dy = 1;
+        }
+
+        void updateDXandDY() {
+            if (field.getColor(x + dx, y) == COLOR_WATER) dx = -dx;
+            if (field.getColor(x, y + dy) == COLOR_WATER) dy = -dy;
+        }
+
+        void move() {
+            updateDXandDY();
+            x += dx;
+            y += dy;
+        }
+
+        boolean isHitXonix() {
+            updateDXandDY();
+            if (x + dx == xonix.getX() && y + dy == xonix.getY()) return true;
+            return false;
+        }
+
+        void paint(Graphics g) {
+            g.setColor(new Color(COLOR_WATER));
+            g.fillRect(x * POINT_SIZE, y * POINT_SIZE, POINT_SIZE, POINT_SIZE);
+            g.setColor(new Color(COLOR_LAND));
+            g.fillRect(x * POINT_SIZE + 2, y * POINT_SIZE + 2, POINT_SIZE - 4, POINT_SIZE - 4);
+        }
+    }
