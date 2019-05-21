@@ -1,0 +1,33 @@
+ void updateDXandDY() {
+            if (field.getColor(x + dx, y) == COLOR_LAND) dx = -dx;
+            if (field.getColor(x, y + dy) == COLOR_LAND) dy = -dy;
+        }
+
+        void move() {
+            updateDXandDY();
+            x += dx;
+            y += dy;
+        }
+
+        int getX() {
+            return x;
+        }
+
+        int getY() {
+            return y;
+        }
+
+        boolean isHitTrackOrXonix() {
+            updateDXandDY();
+            if (field.getColor(x + dx, y + dy) == COLOR_TRACK) return true;
+            if (x + dx == xonix.getX() && y + dy == xonix.getY()) return true;
+            return false;
+        }
+
+        void paint(Graphics g) {
+            g.setColor(Color.white);
+            g.fillOval(x * POINT_SIZE, y * POINT_SIZE, POINT_SIZE, POINT_SIZE);
+            g.setColor(new Color(COLOR_LAND));
+            g.fillOval(x * POINT_SIZE + 2, y * POINT_SIZE + 2, POINT_SIZE - 4, POINT_SIZE - 4);
+        }
+    }
