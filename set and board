@@ -1,0 +1,24 @@
+ public static void main(String[] args) {
+        new GameXonix().go();
+    }
+
+    GameXonix() {
+        setTitle(TITLE_OF_PROGRAM);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setBounds(START_LOCATION, START_LOCATION, FIELD_WIDTH * POINT_SIZE + FIELD_DX, FIELD_HEIGHT * POINT_SIZE + FIELD_DY);
+        setResizable(false);
+        board.setFont(font);
+        board.setOpaque(true);
+        board.setBackground(Color.black);
+        board.setForeground(Color.white);
+        board.setHorizontalAlignment(JLabel.CENTER);
+        add(BorderLayout.CENTER, canvas);
+        add(BorderLayout.SOUTH, board);
+        addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() >= LEFT && e.getKeyCode() <= DOWN)
+                    xonix.setDirection(e.getKeyCode());
+            }
+        });
+        setVisible(true);
+    }
