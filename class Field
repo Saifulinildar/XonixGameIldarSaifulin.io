@@ -1,0 +1,9 @@
+  class Field {
+        private final int WATER_AREA = (FIELD_WIDTH - 4) * (FIELD_HEIGHT - 4);
+        private int[][] field = new int[FIELD_WIDTH][FIELD_HEIGHT];
+        private float currentWaterArea;
+        private int countScore = 0;
+
+        Field() {
+            init();
+        }
