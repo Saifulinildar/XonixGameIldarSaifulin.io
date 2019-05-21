@@ -1,0 +1,25 @@
+ void go() { // main loop of game
+        while (!gameover.isGameOver()) {
+            xonix.move();
+            balls.move();
+            cube.move();
+            canvas.repaint();
+            board.setText(String.format(FORMAT_STRING, field.getCountScore(), "Xn:", xonix.getCountLives(), "Full:", field.getCurrentPercent()));
+            delay.wait(SHOW_DELAY);
+            if (xonix.isSelfCrosed() || balls.isHitTrackOrXonix() || cube.isHitXonix()) {
+                xonix.decreaseCountLives();
+                if (xonix.getCountLives() > 0) {
+                    xonix.init();
+                    field.clearTrack();
+                    delay.wait(SHOW_DELAY * 10);
+                }
+            }
+            if (field.getCurrentPercent() >= PERCENT_OF_WATER_CAPTURE) {
+                field.init();
+                xonix.init();
+                cube.init();
+                balls.add();
+                delay.wait(SHOW_DELAY * 10);
+            }
+        }
+    }
