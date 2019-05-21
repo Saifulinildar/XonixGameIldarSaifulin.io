@@ -1,0 +1,61 @@
+void init() {
+            for (int y = 0; y < FIELD_HEIGHT; y++)
+                for (int x = 0; x < FIELD_WIDTH; x++)
+                    field[x][y] = (x < 2 || x > FIELD_WIDTH - 3 || y < 2 || y > FIELD_HEIGHT - 3) ? COLOR_LAND : COLOR_WATER;
+            currentWaterArea = WATER_AREA;
+        }
+
+        int getColor(int x, int y) {
+            if (x < 0 || y < 0 || x > FIELD_WIDTH - 1 || y > FIELD_HEIGHT - 1) return COLOR_WATER;
+            return field[x][y];
+        }
+
+        void setColor(int x, int y, int color) {
+            field[x][y] = color;
+        }
+
+        int getCountScore() {
+            return countScore;
+        }
+
+        float getCurrentPercent() {
+            return 100f - currentWaterArea / WATER_AREA * 100;
+        }
+
+        void clearTrack() { // clear track of Xonix
+            for (int y = 0; y < FIELD_HEIGHT; y++)
+                for (int x = 0; x < FIELD_WIDTH; x++)
+                    if (field[x][y] == COLOR_TRACK) field[x][y] = COLOR_WATER;
+        }
+
+        void fillTemporary(int x, int y) {
+            if (field[x][y] > COLOR_WATER) return;
+            field[x][y] = COLOR_TEMP; // filling temporary color
+            for (int dx = -1; dx < 2; dx++)
+                for (int dy = -1; dy < 2; dy++) fillTemporary(x + dx, y + dy);
+        }
+
+        void tryToFill() {
+            currentWaterArea = 0;
+            for (Ball ball : balls.getBalls()) fillTemporary(ball.getX(), ball.getY());
+            for (int y = 0; y < FIELD_HEIGHT; y++)
+                for (int x = 0; x < FIELD_WIDTH; x++) {
+                    if (field[x][y] == COLOR_TRACK || field[x][y] == COLOR_WATER) {
+                        field[x][y] = COLOR_LAND;
+                        countScore += 10;
+                    }
+                    if (field[x][y] == COLOR_TEMP) {
+                        field[x][y] = COLOR_WATER;
+                        currentWaterArea++;
+                    }
+                }
+        }
+
+        void paint(Graphics g) {
+            for (int y = 0; y < FIELD_HEIGHT; y++)
+                for (int x = 0; x < FIELD_WIDTH; x++) {
+                    g.setColor(new Color(field[x][y]));
+                    g.fillRect(x * POINT_SIZE, y * POINT_SIZE, POINT_SIZE, POINT_SIZE);
+                }
+        }
+    }
