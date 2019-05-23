@@ -1,0 +1,19 @@
+int getX() {
+            return x;
+        }
+
+        int getY() {
+            return y;
+        }
+
+        int getCountLives() {
+            return countLives;
+        }
+
+        void decreaseCountLives() {
+            countLives--;
+        }
+
+        void setDirection(int direction) {
+            this.direction = direction;
+        }
