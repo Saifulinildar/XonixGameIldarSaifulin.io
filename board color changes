@@ -1,0 +1,2 @@
+ board.setBackground(Color.red);
+        board.setForeground(Color.black);
