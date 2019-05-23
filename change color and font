@@ -1,0 +1,2 @@
+ g.setColor(Color.red);
+                g.setFont(new Font("", Font.HANGING_BASELINE, 70));
