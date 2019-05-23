@@ -1,4 +1,4 @@
-void clearTrack() { // clear track of Xonix
+void clearTrack() { 
             for (int y = 0; y < FIELD_HEIGHT; y++)
                 for (int x = 0; x < FIELD_WIDTH; x++)
                     if (field[x][y] == COLOR_TRACK) field[x][y] = COLOR_WATER;
