@@ -1,0 +1,6 @@
+ void fillTemporary(int x, int y) {
+            if (field[x][y] > COLOR_WATER) return;
+            field[x][y] = COLOR_TEMP; 
+            for (int dx = -1; dx < 2; dx++)
+                for (int dy = -1; dy < 2; dy++) fillTemporary(x + dx, y + dy);
+        }
