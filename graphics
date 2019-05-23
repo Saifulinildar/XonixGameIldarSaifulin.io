@@ -1,0 +1,8 @@
+void paint(Graphics g) {
+            for (int y = 0; y < FIELD_HEIGHT; y++)
+                for (int x = 0; x < FIELD_WIDTH; x++) {
+                    g.setColor(new Color(field[x][y]));
+                    g.fillRect(x * POINT_SIZE, y * POINT_SIZE, POINT_SIZE, POINT_SIZE);
+                }
+        }
+    }
