@@ -1,0 +1,11 @@
+   class Canvas extends JPanel { 
+        public void paint(Graphics g) {
+            super.paint(g);
+            field.paint(g);
+            xonix.paint(g);
+            balls.paint(g);
+            cube.paint(g);
+            gameover.paint(g);
+        }
+    }
+}
